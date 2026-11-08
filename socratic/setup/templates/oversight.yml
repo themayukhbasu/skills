@@ -1,0 +1,15 @@
+# Oversight record. /approve and /drill append events; the human may correct them.
+
+summary:
+  catch_rate: null    # caught / (caught + missed + rubber_stamp), over the last 20 events
+  rubber_stamps: 0
+  escapes: 0
+  blind_spots: []     # flaw-taxonomy categories missed 2+ times in the last 10 events
+
+# events:
+#   - date: 2026-11-08
+#     source: approve        # approve | drill | escape
+#     result: caught         # caught | missed | rubber_stamp | pass | escape
+#     category: idempotency  # flaw-taxonomy id, when known
+#     note: spotted POST retried on timeout
+events: []

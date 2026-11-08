@@ -1,0 +1,11 @@
+# Concept mastery. Agents update this after every gate; the human may correct it.
+#   unknown: not yet covered
+#   shaky:   covered, but a gate answer was missing something
+#   solid:   named the invariant, said why it matters, traced a failure
+#
+# concepts:
+#   b-tree-split:
+#     level: shaky
+#     updated: 2026-11-08
+#     note: missed the root-split case
+concepts: {}

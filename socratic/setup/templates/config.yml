@@ -1,0 +1,17 @@
+# Socratic config. Written by /socratic-setup; safe to edit by hand.
+
+# Approve gate strictness:
+#   strict: the commit is blocked until /approve passes (needs the hook)
+#   nudge:  the agent asks the gate questions; nothing is blocked
+#   off:    no gate
+gate: nudge
+
+# Highest hint rung the agent may reach: L1 | L2 | L3 | L4
+hint_ceiling: L4
+
+# Globs the human writes. Agents may read these paths but not write them (unless escaped).
+learning_critical:
+  - src/**
+
+# true: commit .socratic/ to git. false: keep it local (git-ignored).
+commit_state: false
