@@ -27,6 +27,14 @@ L1  Learner state        .socratic/ (mission, mastery, oversight)
 L0  Core contract        core/CONTRACT.md
 ```
 
+Install as a Claude Code plugin:
+
+```
+/plugin install socratic --marketplace themayukhbasu/skills
+```
+
+Or by hand (any agent): copy the whole `socratic/` folder into your skills directory. Keep it whole, because skills reach `core/` and `hooks/` by relative path. Then run `/socratic-setup` in the repo you want to learn in.
+
 - `core/CONTRACT.md`: the shared behaviour contract (ownership, hint ladder, gates, escape hatch). Installed into a repo's `AGENTS.md`; every Socratic skill follows it.
 - `setup/` → `/socratic-setup`: installs the contract into a repo's `AGENTS.md` and creates `.socratic/` (config, mission, mastery, oversight) from `templates/`.
 - `oversee/approve-gate/` → `/approve`: before accepting an agent diff, the human answers what it does, how it could fail, and how to verify it. Results are logged to `.socratic/oversight.yml`.

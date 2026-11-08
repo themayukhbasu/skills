@@ -1,0 +1,19 @@
+{
+  "name": "socratic",
+  "version": "0.1.0",
+  "description": "Socratic skill stack: AI agents teach by questioning, and train developers to oversee agent output instead of rubber-stamping it.",
+  "author": {
+    "name": "Mayukh Basu",
+    "url": "https://github.com/themayukhbasu"
+  },
+  "repository": "https://github.com/themayukhbasu/skills",
+  "keywords": ["learning", "tutor", "socratic", "code-review", "oversight"],
+  "skills": [
+    "./setup",
+    "./oversee/approve-gate",
+    "./oversee/drill",
+    "./modes/tutor",
+    "./modes/pair",
+    "./modes/debug"
+  ]
+}

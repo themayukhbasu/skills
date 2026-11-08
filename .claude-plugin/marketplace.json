@@ -1,0 +1,17 @@
+{
+  "name": "themayukhbasu-skills",
+  "owner": {
+    "name": "Mayukh Basu",
+    "url": "https://github.com/themayukhbasu"
+  },
+  "description": "Mayukh Basu's agent skills.",
+  "plugins": [
+    {
+      "name": "socratic",
+      "source": "./socratic",
+      "description": "Learn with AI agents, and learn to oversee them: Socratic tutor, pair, debug, approve gate and review drills.",
+      "category": "learning",
+      "keywords": ["learning", "tutor", "socratic", "oversight"]
+    }
+  ]
+}
