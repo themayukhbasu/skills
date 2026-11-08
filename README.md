@@ -33,3 +33,4 @@ L0  Core contract        core/CONTRACT.md
 - `hooks/pre-commit`: in `gate: strict` mode, blocks a commit until `/approve` has passed for that exact staged diff. `SOCRATIC_ESCAPE=1` lets it through and logs the escape. Tests: `python3 -m unittest socratic/hooks/test_pre_commit.py`.
 - `oversee/drill/` → `/drill`: the agent writes code with one planted flaw from `TAXONOMY.md` for the human to catch. Drills target the learner's `blind_spots`; `SEEDS.md` sets the quality bar.
 - `modes/tutor/` → `/socratic-tutor`: learn one concept by guided questioning, ending with a transfer problem and a recap. Updates `mastery.yml`.
+- `modes/pair/` → `/socratic-pair`: the agent navigates and gathers evidence; the human writes the code. Ends with `/approve` on their own diff.
