@@ -14,3 +14,17 @@ Bot team skills for the Grok bot roster (chief of staff + per-repo PM / builder 
 Personal overlay on stock `/wayfinder`:
 
 - `slow-wayfinder`: Overlay on stock `/wayfinder` (needs `/wayfinder`, `/to-spec`, `/to-tickets`): one question at a time, repo checkpoints, and map-only charting.
+
+## `socratic/`
+
+A skill stack that trains developers to learn with AI agents and to oversee them instead of rubber-stamping their output. The agent asks rather than answers, and every approval has to be earned. Generalized from the WalRusDB learning contract. Tracking: issue #10.
+
+```
+L5  Setup & guardrails   install contract, fence paths, hook
+L3  Oversight training   approve gate, drills
+L2  Modes                tutor · pair · debug
+L1  Learner state        .socratic/ (mission, mastery, oversight)
+L0  Core contract        core/CONTRACT.md
+```
+
+- `core/CONTRACT.md`: the shared behaviour contract (ownership, hint ladder, gates, escape hatch). Installed into a repo's `AGENTS.md`; every Socratic skill follows it.
