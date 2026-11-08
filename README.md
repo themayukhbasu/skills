@@ -34,3 +34,4 @@ L0  Core contract        core/CONTRACT.md
 - `oversee/drill/` → `/drill`: the agent writes code with one planted flaw from `TAXONOMY.md` for the human to catch. Drills target the learner's `blind_spots`; `SEEDS.md` sets the quality bar.
 - `modes/tutor/` → `/socratic-tutor`: learn one concept by guided questioning, ending with a transfer problem and a recap. Updates `mastery.yml`.
 - `modes/pair/` → `/socratic-pair`: the agent navigates and gathers evidence; the human writes the code. Ends with `/approve` on their own diff.
+- `modes/debug/` → `/socratic-debug`: the human restates the error, forms hypotheses and writes the fix; the agent reproduces and keeps the loop honest.
