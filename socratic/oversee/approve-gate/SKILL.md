@@ -33,6 +33,8 @@ Follow the Socratic contract in `AGENTS.md`. Read `gate` from `.socratic/config.
    - `rubber_stamp`: their first answers were empty or generic ("looks fine", "run the tests")
    - `escape`: they said "just approve it". Note their reason.
    
+   Also fold in any lines from `.socratic/escapes.log` (commits escaped through the hook) as `escape` events, then empty the log.
+
    Set `category` to the taxonomy id of the riskiest issue when one fits. Done when the event is written and `summary` is current.
 
 6. **Mark the pass.** On `caught` or `missed`, write the diff hash to `.socratic/approvals/<hash>`. The strict-mode hook checks this file. Then tell the human the gate passed. Done when the marker exists, or (for `escape`) the escape is logged.

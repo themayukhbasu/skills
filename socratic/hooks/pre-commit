@@ -1,0 +1,33 @@
+#!/bin/sh
+# Socratic approve-gate hook. In `gate: strict` mode, blocks a commit until
+# /approve has passed for exactly the staged diff. Installed by /socratic-setup.
+#
+#   pass marker: .socratic/approvals/<first 16 hex of sha256(git diff --cached)>
+#   escape:      SOCRATIC_ESCAPE=1 [SOCRATIC_REASON="..."] git commit ...
+#                (logged to .socratic/escapes.log; /approve folds it into oversight.yml)
+
+root=$(git rev-parse --show-toplevel) || exit 0
+cfg="$root/.socratic/config.yml"
+[ -f "$cfg" ] || exit 0
+
+gate=$(sed -n 's/^gate:[[:space:]]*\([a-z]*\).*/\1/p' "$cfg" | head -n 1)
+[ "$gate" = "strict" ] || exit 0
+
+git diff --cached --quiet && exit 0
+hash=$(git diff --cached | sha256sum | cut -c1-16)
+
+if [ "$SOCRATIC_ESCAPE" = "1" ]; then
+  printf '%s\t%s\t%s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$hash" "${SOCRATIC_REASON:-no reason given}" \
+    >> "$root/.socratic/escapes.log"
+  echo "socratic: approve gate escaped for $hash (logged)." >&2
+  exit 0
+fi
+
+[ -f "$root/.socratic/approvals/$hash" ] && exit 0
+
+cat >&2 <<MSG
+socratic: commit blocked. The approve gate (strict) hasn't passed for this diff ($hash).
+  Run /approve with your agent, then commit again.
+  Urgent? SOCRATIC_ESCAPE=1 SOCRATIC_REASON="why" git commit ...  (logged)
+MSG
+exit 1

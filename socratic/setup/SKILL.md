@@ -11,6 +11,7 @@ Install the Socratic contract and learner state into the current repo, or update
 Sources, relative to this skill:
 - `../core/CONTRACT.md`: the contract
 - `templates/`: the `.socratic/` files
+- `../hooks/pre-commit`: the strict-mode hook
 
 If either is missing, say the `socratic/` folder is incomplete and stop.
 
@@ -30,4 +31,6 @@ If either is missing, say the `socratic/` folder is incomplete and stop.
 
 5. **Git.** Add `.socratic/` to `.gitignore` unless the human chose to commit their state (`commit_state: true`). Done when `git check-ignore .socratic/config.yml` matches the choice.
 
-6. **Report.** List the files written, the gate mode, and the next commands: `/socratic-tutor` to learn a concept, `/socratic-pair` to build together, `/drill` to practise review.
+6. **Hook.** If `gate` is `strict`, install `../hooks/pre-commit` as `.git/hooks/pre-commit` (executable). If a pre-commit hook already exists, keep it and call ours from it. If `gate` is not `strict`, leave hooks alone: the hook is a no-op outside strict mode anyway. Done when a strict repo blocks a commit that has no `/approve` pass.
+
+7. **Report.** List the files written, the gate mode, and the next commands: `/socratic-tutor` to learn a concept, `/socratic-pair` to build together, `/drill` to practise review.
