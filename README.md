@@ -29,3 +29,4 @@ L0  Core contract        core/CONTRACT.md
 
 - `core/CONTRACT.md`: the shared behaviour contract (ownership, hint ladder, gates, escape hatch). Installed into a repo's `AGENTS.md`; every Socratic skill follows it.
 - `setup/` → `/socratic-setup`: installs the contract into a repo's `AGENTS.md` and creates `.socratic/` (config, mission, mastery, oversight) from `templates/`.
+- `oversee/approve-gate/` → `/approve`: before accepting an agent diff, the human answers what it does, how it could fail, and how to verify it. Results are logged to `.socratic/oversight.yml`.
