@@ -17,7 +17,7 @@ Personal overlay on stock `/wayfinder`:
 
 ## `socratic/`
 
-A skill stack that trains developers to learn with AI agents and to oversee them instead of rubber-stamping their output. The agent asks rather than answers, and every approval has to be earned. Generalized from the WalRusDB learning contract. Tracking: issue #10.
+**Learn with AI agents without becoming a rubber stamp.** A skill stack where the agent teaches by asking, you write the code that matters, and you approve a diff only after showing you understand it. Start with [`socratic/README.md`](socratic/README.md). Generalized from the WalRusDB learning contract. Tracking: issue #10.
 
 ```
 L5  Setup & guardrails   install contract, fence paths, hook
