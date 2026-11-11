@@ -1,15 +1,12 @@
-# Oversight record. /approve and /drill append events; the human may correct them.
+# Oversight record. /socratic:approve, /socratic:drill and /socratic:debug append events;
+# the human may correct them. Event fields and the summary rules: .socratic/RECORDING.md
 
 summary:
-  catch_rate: null    # caught / (caught + missed + rubber_stamp), over the last 20 events
+  catch_rate: null            # caught / (caught + missed), last 20 agent-code reviews and drills
+  false_alarm_rate: null      # false_alarm / (false_alarm + clean), drills in that window
+  own_code_catch_rate: null   # as catch_rate, for /socratic:approve on the human's own diffs
   rubber_stamps: 0
   escapes: 0
-  blind_spots: []     # flaw-taxonomy categories missed 2+ times in the last 10 events
+  blind_spots: []             # flaw-taxonomy ids, most recent miss first
 
-# events:
-#   - date: 2026-11-08
-#     source: approve        # approve | drill | escape
-#     result: caught         # caught | missed | rubber_stamp | pass | escape
-#     category: idempotency  # flaw-taxonomy id, when known
-#     note: spotted POST retried on timeout
 events: []
