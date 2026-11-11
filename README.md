@@ -37,3 +37,4 @@ Commands are written as the plugin exposes them (`/socratic:<skill>`). With a ma
 - `oversee/drill/` → `/socratic:drill`: the agent writes a short review drill, with one planted flaw from `TAXONOMY.md` or (about 1 in 4) none, for the human to approve or reject. Drills target `blind_spots` and recently learned concepts. `SEEDS.md` sets the quality bar, by difficulty.
 - `modes/tutor/` → `/socratic:tutor`: learn one concept by guided questioning, ending with a transfer problem and a recap. Picks review misses and blind spots first, then the mission roadmap.
 - `modes/pair/` → `/socratic:pair`: the agent navigates and gathers evidence; the human writes the code. Sessions adapt to the concepts' mastery, and end with `/socratic:approve` on the human's own diff.
+- `modes/debug/` → `/socratic:debug`: the human restates the error, forms hypotheses and writes the fix; the agent reproduces and keeps the loop honest. The root cause is logged by category, so drills target it.
