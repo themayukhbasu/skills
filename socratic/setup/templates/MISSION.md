@@ -1,6 +1,6 @@
 # Mission
 
-<!-- Written by /socratic-setup from the human's answers. Every Socratic skill grounds its teaching in this file. -->
+<!-- Written by /socratic:setup from the human's answers. Every Socratic skill grounds its teaching in this file. -->
 
 ## What I'm learning
 

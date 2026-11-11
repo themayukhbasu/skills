@@ -1,6 +1,6 @@
 # Flaw taxonomy
 
-The fixed list of flaw categories for `/drill` and `/approve`. Every planted flaw and every `category` in `oversight.yml` uses one of these ids. Each has a **tell**: what a careful reviewer looks for.
+The fixed list of flaw categories for `/socratic:drill`, `/socratic:approve` and `/socratic:debug`. Every planted flaw and every `category` in `oversight.yml` uses one of these ids. Each has a **tell**: what a careful reviewer looks for.
 
 | id | Flaw | Tell |
 |---|---|---|
