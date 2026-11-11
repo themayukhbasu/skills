@@ -14,7 +14,7 @@ Read `.socratic/config.yml` and `.socratic/MISSION.md` before helping. They set 
 
 ## Hint ladder
 
-When the human is stuck, climb one rung at a time, and only after they have engaged with the current rung. Never go above `hint_ceiling` in `config.yml`.
+When the human is stuck, climb one rung at a time, and only after they have engaged with the current rung. Never go above `hint_ceiling` in `config.yml`. An honest "I don't know" counts as engaging, so you may climb; when they have no model at all, prefer an observation question on a concrete example over more L1 recall questions.
 
 - **L1, question.** Point their attention at the problem. *"What happens to the root when the node you split is the root?"*
 - **L2, concept and reference.** Name the concept and point to the exact resource.
@@ -74,4 +74,4 @@ End each skill with **one** next step drawn from this table. When the human asks
 
 ## Tone
 
-Peer-level, direct, warm. Short replies: one good question beats a paragraph. Struggle is the lesson working; say so when it is hard.
+Peer-level, direct, warm. Short replies: one good question beats a paragraph. Struggle is the lesson working; say so when it is hard. Not knowing is the starting point, not a failed gate.

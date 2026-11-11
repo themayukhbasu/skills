@@ -24,7 +24,14 @@ Follow the Socratic contract (in `contract_file` from `.socratic/config.yml`). G
 
 2. **Diagnose.** Ask one question that shows what they already believe about it. If it shows a gap, write the concept as `shaky` now, with a note on the gap, so the evidence survives an early stop. Done when you can say, privately, what they know and what is missing or wrong.
 
-3. **Guide.** Break the concept into the 2–4 ideas it rests on, in prerequisite order. For each idea, run the loop: question → their answer → probe or confirm. Climb the hint ladder only when they are stuck, and prefer an example from this repo over an abstract one. Done when they have stated each idea correctly in their own words.
+   No model at all ("I don't know") is a valid answer: write the concept as `unknown` now, with `note: no prior model`, and do not re-ask in other words. Then, in order:
+   1. **Drop down.** Probe one prerequisite idea the concept rests on. If it is missing too, propose switching the session to it. If the human agrees, add to the original concept's note which prerequisite it waits on, and restart at step 2 with the prerequisite; if not, go on to 2.
+   2. **Seed, don't tell.** If the prerequisite holds, show a concrete case from this repo or `MISSION.md` and ask observation questions (*"what do you notice?"*, *"what would break if…?"*), not recall questions.
+   3. **Name it.** If observation still yields nothing, give L2 (within `hint_ceiling`), then apply **Re-ask after reading**.
+
+   Then go to step 3.
+
+3. **Guide.** Break the concept into the 2–4 ideas it rests on, in prerequisite order. For each idea, run the loop: question → their answer → probe or confirm. Climb the hint ladder only when they are stuck, and prefer an example from this repo over an abstract one. After a no-model diagnose, start from the case you seeded. Done when they have stated each idea correctly in their own words.
 
 4. **Check transfer.** Pose a new problem that needs the concept in a different setting, ideally a change to this repo. Have them solve or sketch it. Done when the answer is **solid**, as the contract defines it.
 

@@ -18,7 +18,7 @@ concepts:
 ```
 
 - **Id:** kebab-case, named after the idea, not the code (`root-split`, not `split_root_fn`). Reuse an existing key before adding one.
-- **unknown:** written only by setup, from the mission roadmap. A concept is `unknown` until a gate tests it.
+- **unknown:** written by setup, from the mission roadmap, or by tutor when a diagnose finds no prior model (say so in `note`). A concept is `unknown` until a gate tests it.
 - **shaky:** a gate found something missing. Write it as soon as the gap shows, and say what was missing in `note`.
 - **solid:** the human named the invariant, said why it matters and traced a failure, on the first try.
 - **Downgrade** a `solid` concept to `shaky` when a review miss or a debug root cause lands on it.
