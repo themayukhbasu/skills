@@ -7,13 +7,20 @@
     "url": "https://github.com/themayukhbasu"
   },
   "repository": "https://github.com/themayukhbasu/skills",
-  "keywords": ["learning", "tutor", "socratic", "code-review", "oversight"],
+  "keywords": [
+    "learning",
+    "tutor",
+    "socratic",
+    "code-review",
+    "oversight"
+  ],
   "skills": [
     "./setup",
     "./oversee/approve-gate",
     "./oversee/drill",
     "./modes/tutor",
     "./modes/pair",
-    "./modes/debug"
+    "./modes/debug",
+    "./next"
   ]
 }

@@ -1,10 +1,15 @@
-# Socratic config. Written by /socratic-setup; safe to edit by hand.
+# Socratic config. Written by /socratic:setup; safe to edit by hand.
 
 # Approve gate strictness:
-#   strict: the commit is blocked until /approve passes (needs the hook)
+#   strict: the commit is blocked until /socratic:approve passes (needs the hook)
 #   nudge:  the agent asks the gate questions; nothing is blocked
 #   off:    no gate
 gate: nudge
+
+# Strict mode gates only commits that touch these globs (empty: every path)...
+gate_paths: []
+# ...and change at least this many lines in them. Smaller commits (a typo, a rename) go through.
+gate_min_lines: 5
 
 # Highest hint rung the agent may reach: L1 | L2 | L3 | L4
 hint_ceiling: L4
@@ -15,3 +20,8 @@ learning_critical:
 
 # true: commit .socratic/ to git. false: keep it local (git-ignored).
 commit_state: false
+
+# Where the contract is installed:
+#   AGENTS.md:       shared; every agent user in this repo gets the Socratic contract (repos you own)
+#   CLAUDE.local.md: personal and git-ignored; only you get it (shared work repos)
+contract_file: AGENTS.md
