@@ -30,7 +30,7 @@ Posts with your own evidence travel much further than posts with a pitch. Use th
 ## Demo script (60 seconds, terminal recording)
 
 1. **0–5s.** Title card: "Can you review what your agent writes?"
-2. **5–15s.** Type `/drill`. The request and the code appear. Pause long enough for a viewer to read it.
+2. **5–15s.** Type `/socratic:drill`. The request and the code appear. Pause long enough for a viewer to read it.
 3. **15–30s.** Type a confident wrong approval. The agent replies with one question.
 4. **30–45s.** Type the realisation. The agent confirms and asks for the fix in words.
 5. **45–55s.** Show `.socratic/oversight.yml` with the new event and the blind spot.
@@ -69,7 +69,7 @@ Follow-up replies:
 5. **One drill, shown.** The retried-charge example, with the question that turns it.
 6. **What my own record says.** [Your numbers and your blind spot.]
 7. **What it isn't.** It's slower on purpose, it has an escape hatch, and it's v0.1 on Claude Code.
-8. **Try it.** The two install commands and `/drill`.
+8. **Try it.** The two install commands and `/socratic:drill`.
 
 ## Show HN
 

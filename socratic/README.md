@@ -5,14 +5,14 @@
 A skill stack for developers who use coding agents every day and still want to get better at the craft. The agent teaches by asking, you write the code that matters, and you approve a diff only after showing you understand it.
 
 ```
-   /socratic-tutor ──► /socratic-pair ──► /approve ───┐
-     (understand)       (you build)      (you defend)  │
-                             │                         ▼
-                             ▼                 .socratic/ record
-                      /socratic-debug        (what you know, what you miss)
-                       (you diagnose)                  │
-                                                       ▼
-                                     /drill targets your blind spots
+   /socratic:tutor ──► /socratic:pair ──► /socratic:approve ──┐
+     (understand)        (you build)        (you defend)        │
+          ▲                   │                                 ▼
+          │                   ▼                         .socratic/ record
+          │            /socratic:debug          (what you know, what you miss)
+          │             (you diagnose)                          │
+          │                                                     ▼
+          └──── misses ◄──── /socratic:drill targets your blind spots
 ```
 
 ## The problem
@@ -28,10 +28,10 @@ More and more of the job is deciding whether to accept what an agent wrote. Almo
 
 ## What a session feels like
 
-A two-minute review drill. The agent writes a short, realistic piece of code with one planted flaw and asks you to approve or reject it.
+A two-minute review drill. The agent writes a short, realistic piece of code, usually with one planted flaw and sometimes with none, and asks you to approve or reject it.
 
 ```
-> /drill
+> /socratic:drill
 
 Request: "Retry the charge call on network errors."
 
@@ -63,36 +63,37 @@ You get a question where another tool would give you the answer. The result goes
 
 ## Quick start
 
-In Claude Code:
+In a terminal:
 
 ```
-/plugin marketplace add themayukhbasu/skills
+claude plugin marketplace add themayukhbasu/skills
 ```
 
 ```
-/plugin install socratic@themayukhbasu-skills
+claude plugin install socratic@themayukhbasu-skills
 ```
 
 Then, in the repo you want to learn in:
 
 ```
-/socratic-setup
+/socratic:setup
 ```
 
-Setup asks four questions (what you're learning, which paths are yours to write, how strict the gate is, how far hints may go) and writes your learner state to `.socratic/`.
+Setup asks six short questions (what you're learning, the concepts on your roadmap, shared or personal install, which paths are yours to write, how strict the gate is, how far hints may go) and writes your learner state to `.socratic/`. After that, `/socratic:next` always tells you what to do next.
 
-Using another agent? Copy the whole `socratic/` folder into its skills directory. Keep it whole: the skills reach `core/` and `hooks/` by relative path.
+Using another agent? Copy the whole `socratic/` folder into its skills directory, and drop the `socratic:` prefix from the commands. Keep the folder whole: the skills reach `core/` and `hooks/` by relative path.
 
 ## What's in the stack
 
 | Command | What you do | What the agent does |
 |---|---|---|
-| `/socratic-tutor [concept]` | Explain a concept, then apply it to a new problem | Asks, probes, and only hints when you're stuck |
-| `/socratic-pair <task>` | Write the code | Navigates, runs things, asks you to predict before each run |
-| `/socratic-debug <error>` | Form and test the hypotheses, write the fix | Reproduces, and stops you before a fix that only silences the error |
-| `/approve` | Say what a diff does, how it could fail, how you'd verify it | Grades your answers against the riskiest issue it found |
-| `/drill [category]` | Review code with one planted flaw | Targets the flaw categories you miss most |
-| `/socratic-setup` | Answer four questions | Installs the contract and your learner state |
+| `/socratic:next` | Ask what to do now | Shows your record and proposes one next step |
+| `/socratic:tutor [concept]` | Explain a concept, then apply it to a new problem | Asks, probes, and only hints when you're stuck |
+| `/socratic:pair <task>` | Write the code | Navigates, runs things, asks you to predict before each run |
+| `/socratic:debug <error>` | Form and test the hypotheses, write the fix | Reproduces, and stops you before a fix that only silences the error |
+| `/socratic:approve` | Say what a diff does, how it could fail, how you'd verify it | Grades your answers against the riskiest issue a fresh reviewer found, or none |
+| `/socratic:drill [category]` | Review short code that may or may not have a flaw | Targets the flaw categories you miss most |
+| `/socratic:setup` | Answer six short questions | Installs the contract and your learner state |
 
 Everything follows one shared contract, [`core/CONTRACT.md`](core/CONTRACT.md). Its main rules:
 
@@ -106,7 +107,7 @@ Everything follows one shared contract, [`core/CONTRACT.md`](core/CONTRACT.md). 
 Your progress lives in plain files in `.socratic/`, which you can read, edit and (if you choose) commit:
 
 - `mastery.yml`: each concept you've worked on, and whether your grasp is shaky or solid.
-- `oversight.yml`: every approve gate and drill, with your catch rate and your blind spots by flaw category.
+- `oversight.yml`: every approve gate, drill and debugged bug, with your catch rate, false-alarm rate and blind spots by flaw category.
 - `MISSION.md`: what you're learning and why, so examples come from your own project.
 
 Drills use ten flaw categories, each with a reviewer's tell, in [`oversee/drill/TAXONOMY.md`](oversee/drill/TAXONOMY.md): off-by-one, null and empty input, idempotency, concurrency, auth, swallowed errors, resource leaks, injection, wrong spec, and untested paths.
@@ -114,9 +115,9 @@ Drills use ten flaw categories, each with a reviewer's tell, in [`oversee/drill/
 ## Built for real work
 
 - **There's always an escape hatch.** Say "just do it" during an outage or a deadline and the agent helps directly. The escape is logged and never blocked.
-- **You choose the strictness.** `strict` blocks a commit until `/approve` passes for that exact diff. `nudge` only asks. `off` turns the gate off.
+- **You choose the strictness.** `strict` blocks a commit until `/socratic:approve` passes for exactly what is staged, and only for the paths and change sizes you choose. `nudge` only asks. `off` turns the gate off.
 - **No service, no account, no telemetry.** It's markdown, YAML and one POSIX shell hook, all in your repo.
-- **Agent-agnostic by design.** The contract installs into `AGENTS.md`, and the skills are plain markdown.
+- **Agent-agnostic by design.** The contract installs into `AGENTS.md` (or a personal file), and the skills are plain markdown.
 
 ## Status
 
@@ -135,7 +136,7 @@ Yes, on purpose, and only where you asked it to. You pick the paths that are lea
 The tutor mode helps most when a topic is new. The approve gate and the drills are aimed at anyone who reviews agent output, which is most working developers now.
 
 **Can I use it in a team repo?**
-Today the contract installs into `AGENTS.md`, which is shared, so it suits a repo you own. A per-user install for shared repos is planned.
+Yes. Setup can install the contract into a personal, git-ignored `CLAUDE.local.md` instead of the shared `AGENTS.md`, so only you get the Socratic behaviour.
 
 **Does the agent ever just give me the answer?**
 When you escape, or when you reach the top of the hint ladder, it gives you a small snippet with the reasoning. It doesn't give you the full solution to something you set out to learn.
