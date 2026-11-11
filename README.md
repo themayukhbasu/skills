@@ -27,6 +27,15 @@ L1  Learner state        .socratic/ (mission, mastery, oversight)
 L0  Core contract        core/CONTRACT.md
 ```
 
+Install as a Claude Code plugin (in a terminal):
+
+```
+claude plugin marketplace add themayukhbasu/skills
+claude plugin install socratic@themayukhbasu-skills
+```
+
+Or by hand (any agent): copy the whole `socratic/` folder into your skills directory. Keep it whole, because skills reach `core/` and `hooks/` by relative path. Then run `/socratic:setup` in the repo you want to learn in, and `/socratic:next` whenever you're not sure what to do.
+
 Commands are written as the plugin exposes them (`/socratic:<skill>`). With a manual install, drop the `socratic:` prefix.
 
 - `core/CONTRACT.md`: the shared behaviour contract (ownership, hint ladder, gates, escape hatch). Installed into a repo's `AGENTS.md`; every Socratic skill follows it.
@@ -38,3 +47,4 @@ Commands are written as the plugin exposes them (`/socratic:<skill>`). With a ma
 - `modes/tutor/` → `/socratic:tutor`: learn one concept by guided questioning, ending with a transfer problem and a recap. Picks review misses and blind spots first, then the mission roadmap.
 - `modes/pair/` → `/socratic:pair`: the agent navigates and gathers evidence; the human writes the code. Sessions adapt to the concepts' mastery, and end with `/socratic:approve` on the human's own diff.
 - `modes/debug/` → `/socratic:debug`: the human restates the error, forms hypotheses and writes the fix; the agent reproduces and keeps the loop honest. The root cause is logged by category, so drills target it.
+- `next/` → `/socratic:next`: reads `.socratic/`, prints the summary (catch rate, blind spots, concepts by level) and proposes one next step.
