@@ -27,7 +27,9 @@ L1  Learner state        .socratic/ (mission, mastery, oversight)
 L0  Core contract        core/CONTRACT.md
 ```
 
+Commands are written as the plugin exposes them (`/socratic:<skill>`). With a manual install, drop the `socratic:` prefix.
+
 - `core/CONTRACT.md`: the shared behaviour contract (ownership, hint ladder, gates, escape hatch). Installed into a repo's `AGENTS.md`; every Socratic skill follows it.
-- `setup/` → `/socratic-setup`: installs the contract into a repo's `AGENTS.md` and creates `.socratic/` (config, mission, mastery, oversight) from `templates/`.
-- `oversee/approve-gate/` → `/approve`: before accepting an agent diff, the human answers what it does, how it could fail, and how to verify it. Results are logged to `.socratic/oversight.yml`.
-- `hooks/pre-commit`: in `gate: strict` mode, blocks a commit until `/approve` has passed for that exact staged diff. `SOCRATIC_ESCAPE=1` lets it through and logs the escape. Tests: `python3 -m unittest socratic/hooks/test_pre_commit.py`.
+- `core/RECORDING.md`: the one definition of how skills write `.socratic/` (concept ids, event fields, summary rules). Setup copies it into the repo.
+- `setup/` → `/socratic:setup`: installs the contract (shared `AGENTS.md` or personal `CLAUDE.local.md`), seeds a concept roadmap from the mission, and creates `.socratic/` from `templates/`.
+- `oversee/approve-gate/` → `/socratic:approve`: before accepting a diff, the human answers what it does, how it could fail, and how to verify it. A fresh reviewer grades the answers; misses feed `mastery.yml` and the next drill or lesson.
