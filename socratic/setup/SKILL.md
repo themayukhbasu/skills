@@ -14,6 +14,7 @@ Sources, relative to this skill:
 - `../core/CONTRACT.md`: the contract
 - `../core/RECORDING.md`: how skills write learner state
 - `templates/`: the `.socratic/` files
+- `../hooks/pre-commit`: the strict-mode hook
 
 If any is missing, say the `socratic/` folder is incomplete and stop.
 
@@ -35,4 +36,6 @@ If any is missing, say the `socratic/` folder is incomplete and stop.
 
 5. **Git.** Unless `commit_state: true`, keep `.socratic/` out of git: in `.gitignore` for a shared install, in `.git/info/exclude` for a personal one (so the shared `.gitignore` is untouched). A personal `CLAUDE.local.md` goes in `.git/info/exclude` too. Done when `git check-ignore .socratic/config.yml` matches the choice.
 
-6. **Report.** List the files written, the install target and the gate mode. Then give one next step: `/socratic:tutor` on the first roadmap concept.
+6. **Hook.** If `gate` is `strict`, install `../hooks/pre-commit` as `.git/hooks/pre-commit` (executable). If a pre-commit hook already exists, keep it and call ours from it. Otherwise leave hooks alone: the hook is a no-op outside strict mode. Done when a strict repo blocks a gated commit that has no `/socratic:approve` pass.
+
+7. **Report.** List the files written, the install target and the gate mode. Then give one next step: `/socratic:tutor` on the first roadmap concept.
