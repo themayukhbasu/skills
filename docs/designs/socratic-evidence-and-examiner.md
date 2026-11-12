@@ -2,7 +2,7 @@
 
 * **Author:** mb0850
 * **Date:** 2026-11-12
-* **Status:** Concept brief. Two goldfish reviews: the first raised blocking objections and the brief was revised; in the second, all seven reviewers returned "survives" with no blocking findings, and their notes are folded into the open items. Review notes left on the pull request were then adopted (see "Review notes on the pull request"); no goldfish reviewer has read those changes or the long-term goal section. Not a design, and nothing is built. The next step is a charting session that turns this into decisions and tickets.
+* **Status:** Concept brief. Two goldfish reviews: the first raised blocking objections and the brief was revised; in the second, all seven reviewers returned "survives" with no blocking findings, and their notes are folded into the open items. Review notes left on the pull request were then adopted (see "Review notes on the pull request"). A third goldfish review read the whole brief, including those changes and the long-term goal section; its notes are folded in. Not a design, and nothing is built. The next step is a charting session that turns this into decisions and tickets.
 
 ## Overview
 
@@ -13,7 +13,7 @@ The socratic pack teaches by questioning. It runs in two places:
 
 The owner's long-term aim is a persistent record of what they know, with a confidence level per concept, that other apps can read. This brief covers a first spike towards it. The owner is the only test subject.
 
-**The problem.** The pack stores verdicts only: `unknown`, `shaky` or `solid`, plus a one-line note. The question, the learner's answer, the hints and the grader's reasoning are lost when the chat ends. So no later method can re-judge the evidence. The verdict also comes from the bot that taught, in the same conversation, and nothing outside that conversation checks it.
+**The problem.** The pack stores verdicts only: `unknown`, `shaky` or `solid`, plus a one-line note. The question, the learner's answer, the hints and the grader's reasoning are lost when the chat ends. The bot does keep a short dated session log on the item's page, but it is a summary of where things stand, not the exchange. So no later method can re-judge the evidence. The verdict also comes from the bot that taught, in the same conversation, and nothing outside that conversation checks it.
 
 **The spike question.** Can the tutor and a cold re-ask leave a trail that is complete enough to re-judge later, and what does that data look like?
 
@@ -32,12 +32,14 @@ The spike does not claim to show whether tutor grades predict later recall. The 
    cold re-ask, no hints     never writes the tutor's fields
 ```
 
+The diagram shows the target. Today the tutor still makes spaced re-asks (open item 1).
+
 1. **One evidence-record shape, defined in the pack.** Each graded exchange is kept word for word. Repo skills write to a git-ignored file in `.socratic/`. The bot's records go to a dedicated Notion database, one row per exchange, linked to the To Learn item. Whether the tutor writes its own records or a separate recorder writes them from the session transcript is open (item 9).
 2. **A separate examiner bot takes over all re-asks.** It has its own profile and skill. It finds taught items in the list without any handoff from the tutor. The tutor bot drops its re-ask rule. Each bot pokes on its own schedule.
 3. **The examiner never writes the tutor's fields.** It logs to its own Notion database. After a failed cold test it asks the owner whether they want the tutor to reteach the topic, so the owner is the feedback path. Automatic feedback to the tutor is deferred.
 4. **The existing levels stay as written.** The log sits beside `unknown`, `shaky` and `solid`; it does not replace them.
-5. **The bot reads the pack at a fixed commit**, not from `main`. The pack can then change, including taking the spaced re-ask out of the tutor skill and `next`, without altering the live bot until its pinned commit is moved on purpose.
-6. **Every record carries that commit id** as its pack version.
+5. **Both bots read the pack at a fixed commit**, not from `main`. The pack can then change, including taking the spaced re-ask out of the tutor skill and `next`, without altering the live bot until its pinned commit is moved on purpose.
+6. **Every bot record carries that commit id** as its pack version. Repo-side records need their own answer (open item 12).
 
 ## Long-term goal
 
@@ -73,6 +75,8 @@ What the owner wants from it:
 - **Repo skills** for dedicated learning inside a repo.
 - **Bots** for day-to-day learning on any topic, which may be someone's main way to learn.
 - **More than one vendor.** Grok today; Claude, Meta and OpenAI bots later, with roles defined once in the pack and mapped to each vendor.
+
+**Two limits the goal puts on later work.** Anything shown to other people, recruiters included, needs its own step that decides what is shown; it must not be a direct read of a log that holds the owner's answers word for word. And evidence from PRs and repos exists today as `oversight.yml` events, so the record shape should stay open to those, not only to tutor exchanges.
 
 **What this means for the spike.** The spike keeps evidence because a scoring model can only be built, and later changed, if the raw exchanges exist. A choice in the spike that discards evidence, ties the record to one vendor or one store, or makes the bots unpleasant to use works against the goal.
 
@@ -119,7 +123,7 @@ Five notes were left on the pull request after the second goldfish review. What 
 |---|---|
 | Pin the bot to a commit instead of keeping pack changes additive | Adopted. Replaces the "additive" decision and settles the pack version for the bot. |
 | Capture evidence outside the tutor, from session transcripts | Not decided. Recorded as open item 9, because it rests on facts about transcripts that have not been checked. |
-| Give the evidence its own Notion database | Adopted. Whether the examiner shares it is open item 4. |
+| Give the evidence its own Notion database | Adopted for tutor evidence. The examiner keeps its own database, as the owner had already decided; the note's other option, one shared database with a `source` column, was not taken. |
 | On a failed cold test, the examiner asks the owner whether to reteach | Adopted. The examiner still never writes the tutor's fields. |
 | Capture first, look at a week of records, then build the examiner | Recorded as the proposed order, for the charting session to confirm. |
 
@@ -153,6 +157,7 @@ Every graded exchange leaves evidence that a later method can re-judge, and a ta
 - **Examiner as a second mode of the tutor bot, or as a change to the existing re-asks.** Rejected by author: a separate profile and skill changes how an agent performs, even on the same model.
 - **Examiner reopens a failed topic for the tutor.** Deferred by author: the flows stay separate. The examiner asks the owner instead.
 - **Keep pack changes additive while the bot reads `main`.** Replaced after pull-request review: it conflicted with taking spaced re-asks out of the pack. Pinning the bot to a commit removes the conflict.
+- **One shared Notion database for both bots, with a `source` column.** Not taken: the owner had decided the examiner logs to its own store, which also keeps the tutor's records out of the examiner's reach. It would collate more easily, so collation has to join two databases.
 - **Keep evidence in the To Learn item's page body.** Replaced after pull-request review by a dedicated database: page bodies are awkward to collate, grow without limit, and sit in a list that Learn: Scout owns.
 - **Commit the evidence log.** Rejected by author: `.socratic/` is git-ignored; the risk of local data loss is accepted.
 - **Levels derived from the log.** Dropped after review: it needs the out-of-scope scoring rule.
@@ -181,14 +186,21 @@ Proposed order, for the charting session to confirm:
 
 A week may cover only one or two topics, so the checkpoint may need to be "a set number of taught topics" instead.
 
+Step 1 cannot start until open items 4 (the Notion database and the bots' write rules) and 9 (who writes the records) are settled.
+
+Two things follow from this order:
+
+- **The tutor bot keeps its own re-ask rule until the examiner exists.** That rule is in the bot's own skill, not the pack, so pinning does not touch it and dropping it is a separate edit. Dropping it earlier would leave the bot with no spaced re-tests at all.
+- **Records will span pack versions.** Settling the fields at step 2 changes the pack, so the pin moves and earlier records carry the older commit id. Someone has to own moving the pin.
+
 Open, for the charting session:
 
-1. **Spaced re-asks left in the pack.** The tutor skill (step 1.4), `next` and the drill (step 1.3) still re-ask a `solid` concept after a delay, and the bot reads the first two. With the bot pinned to a commit, they can be taken out of the pack without changing the live bot by surprise. Still to decide: when they come out, and what replaces them for repo use, where there is no examiner yet. Until then, the pack re-tests differently in a repo than in the bot.
+1. **Spaced re-asks left in the pack.** The tutor skill (step 1.4), `next` and the drill (step 1.3) still re-ask a `solid` concept after a delay, and the bot reads all three. With the bot pinned to a commit, they can be taken out of the pack without changing the live bot by surprise. Still to decide: when they come out, and what replaces them for repo use, where there is no examiner yet. Until then, the pack re-tests differently in a repo than in the bot.
 
    "All re-asks" means spaced re-asks, days or weeks later. The in-session "Re-ask after reading" gate and the transfer check stay with the tutor.
 2. **The record's fields and format.** Reviewers asked for a record id, a schema version, a concrete append-only format, and fields that re-judging needs (rubric, difficulty, hint text). They advised dropping fields that can be derived.
 3. **The concept key for the bot.** A Notion item is a topic, not a concept. A page id plus a sub-concept label was suggested.
-4. **The Notion databases.** One for tutor evidence and one for the examiner, or one shared database with a `source` column. The bots' rules must change to allow the writes: today the tutor may edit only the item's own page.
+4. **The Notion databases.** Tutor evidence and the examiner each have their own database, as decided. The bots' rules must change to allow the writes: today the tutor may edit only the item's own page. Also: what happens to the tutor's existing session log on the item's page once the database exists.
 5. **The examiner's questions.** Where an unseen problem comes from, how repeats are avoided, and whether a rubric is fixed when the topic is taught.
 6. **After a failed cold test.** Whether the examiner explains the answer. The contract's "Explain always" says yes; a clean later test says no.
 7. **Skips.** Separate outcomes for skipped, expired and declined, and a time limit.
@@ -196,7 +208,7 @@ Open, for the charting session:
 9. **Who writes the tutor's records.** Either the tutor logs as it goes, or a separate recorder reads the session transcript afterwards and writes the records, which leaves the tutor's prompt alone. The second needs checking first: whether one bot can read another's transcripts, and how long they are kept. A transcript also holds the grader's reasoning only if the tutor says it aloud, and cutting a transcript into graded exchanges is itself a judgement. Also here: whether the learner is asked for confidence, and when.
 10. **Where vendor mappings live** in the pack.
 11. **How the examiner picks.** Which taught items, in what order, and what it may read to find them (the topic and recap, but not the teaching conversation). The tutor writes `Checked` today; with the examiner barred from the tutor's fields, it needs its own record of when an item was last tested.
-12. **What "pack version" means.** Settled for the bot: the pinned commit id. Repo use still needs an answer, since the plugin's version string does not identify the exact files installed.
+12. **What "pack version" means.** Settled for the bots: the pinned commit id. Still to decide: whether the tutor and the examiner share one commit, how a bot learns the id it must stamp, and the rewrite of the tutor skill's "fetch from `main` every time" instruction. Repo use needs its own answer, since the plugin's version string does not identify the exact files installed.
 13. **Keeping the log out of git.** `.socratic/` is ignored by default, but setup's `commit_state` option can commit it. The evidence log needs its own ignore rule that holds whatever that option says.
 14. **Failed writes.** A check that a record landed, so a lost write does not look like a missing session.
 15. **Who can read the Notion databases**, since both hold verbatim answers.
