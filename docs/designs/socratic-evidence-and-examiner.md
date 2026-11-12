@@ -39,6 +39,43 @@ The spike does not claim to show whether tutor grades predict later recall. The 
 5. **Every record carries the pack version** it was produced under.
 6. **Pack changes are additive**, so the live tutor's teaching is not altered part-way through the spike.
 
+## Long-term goal
+
+This section is context for any agent or person working from this brief. It says where the work is heading, in the owner's terms. **None of it is in scope for the spike.** Use it to judge whether a choice keeps the direction open; do not build towards it without a later brief.
+
+**The idea.** A personal tutor that helps the owner build intuition, and at the same time keeps a live evaluation of what they know: what they are good at, what needs work, and how confident the record is in each.
+
+```
+ existing workflows ─┐
+ (PRs, repos,        ├─► evidence ─► scoring ─► record: concept → level,
+  reading)           │                          confidence, evidence behind it
+ tutor bots ─────────┘                                    │
+                                                          ▼
+                                                    other apps
+```
+
+What the owner wants from it:
+
+- **A live evaluation.** It updates as the owner works and learns; it is not a one-off test.
+- **It plugs into existing workflows** and builds from them, instead of asking for separate study time only.
+- **A knowledge graph**, with evaluation data on each node.
+- **Persistent and reusable.** Other apps can read it. One the owner has in mind shows their current state to recruiters.
+- **More than text later.** Audio and video signals are a possible future input. Text comes first.
+
+**The scoring model is the centre of the idea, and it is unsolved.** The owner expects it to combine several signals and more than one model's judgement. They want it reached through experiments on collected data, with themselves as the first subject, not through introspection. The pack is expected to carry those experiments and the methods for collating the data.
+
+**In about three months,** the owner wants the socratic bots to work as a personal tutor team: it keeps their skills from fading, and it stays interesting and fun to use. More than one bot is expected.
+
+**Why the owner is building it,** in their order: to help themselves learn, to help other people, and to build their presence in AI. Whether other people want a tutor bot is unknown; the owner treats the work as an attempt that is worth the experience either way.
+
+**How the pack is meant to be used once published:**
+
+- **Repo skills** for dedicated learning inside a repo.
+- **Bots** for day-to-day learning on any topic, which may be someone's main way to learn.
+- **More than one vendor.** Grok today; Claude, Meta and OpenAI bots later, with roles defined once in the pack and mapped to each vendor.
+
+**What this means for the spike.** The spike keeps evidence because a scoring model can only be built, and later changed, if the raw exchanges exist. A choice in the spike that discards evidence, ties the record to one vendor or one store, or makes the bots unpleasant to use works against the goal.
+
 ## Analysis
 
 ### What the first review found, and what changed
