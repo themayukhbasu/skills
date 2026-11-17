@@ -9,6 +9,7 @@ Bot team skills for the Grok bot roster (chief of staff + per-repo PM / builder 
 - `project-builder`: Use when you are the builder on a repo bot team: turning an assigned GitHub ticket into a small, verified PR or stack through a cloud agent, handing it to the reviewer, and fixing review comments.
 - `project-reviewer`: Use when you are the reviewer on a repo bot team: reviewing a builder's PR or stack after handoff, before the owner hears about it, and posting one COMMENT review with a pass or changes-needed verdict.
 - `project-researcher`: Use when you are the researcher on a repo bot team: resolving assigned research tickets with cited findings. Tutoring belongs to a separate tutor bot when the team has one.
+- `learn-tutor`: Use when you are a Socratic tutor bot teaching the owner one item at a time from a Notion learning list kept by a separate scout bot.
 
 ## `slow-wayfinder/`
 
